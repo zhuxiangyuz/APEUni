@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_09_19_035808) do
+ActiveRecord::Schema.define(version: 2023_09_19_045633) do
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -28,6 +28,25 @@ ActiveRecord::Schema.define(version: 2023_09_19_035808) do
     t.string "book_name", null: false
     t.integer "user_id", null: false
     t.integer "is_custom", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "word_word_books", force: :cascade do |t|
+    t.integer "word_id", null: false
+    t.integer "word_book_id", null: false
+    t.integer "mastered", default: 0, null: false
+    t.integer "last_reviewed_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "words", force: :cascade do |t|
+    t.string "word", null: false
+    t.string "alternative_spellings"
+    t.string "meaning", null: false
+    t.string "pronunciation", null: false
+    t.string "example_sentence"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
