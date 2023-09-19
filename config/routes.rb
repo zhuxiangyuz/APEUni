@@ -5,6 +5,9 @@ Rails.application.routes.draw do
     namespace :api do
       namespace :v1 do
         resources :word_books
+        resources :words do
+          patch "mastered", on: :collection
+        end
       end
     end
   end
