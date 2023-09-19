@@ -1,6 +1,7 @@
-class CreateWordWordBook < ActiveRecord::Migration[6.1]
+class CreateLearnWords < ActiveRecord::Migration[6.1]
   def change
-    create_table :word_word_books do |t|
+    create_table :learn_words do |t|
+      t.integer :user_id, null: false
       t.integer :word_id, null: false
       t.integer :word_book_id, null: false
       t.integer :mastered, null: false, default: 0, comment: "是否掌握，1：掌握，0：未掌握"

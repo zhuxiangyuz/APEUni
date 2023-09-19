@@ -10,9 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_09_19_045633) do
+ActiveRecord::Schema.define(version: 2023_09_19_061748) do
 
-  create_table "users", force: :cascade do |t|
+  create_table "learn_words", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "word_id", null: false
+    t.integer "word_book_id", null: false
+    t.integer "mastered", default: 0, null: false, comment: "是否掌握，1：掌握，0：未掌握"
+    t.integer "last_reviewed_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "users", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -24,25 +34,17 @@ ActiveRecord::Schema.define(version: 2023_09_19_045633) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  create_table "word_books", force: :cascade do |t|
+  create_table "word_books", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "book_name", null: false
-    t.integer "user_id", null: false
-    t.integer "is_custom", default: 0, null: false
+    t.integer "user_id"
+    t.integer "is_custom", default: 0, null: false, comment: "是否生词本，1：是，0：否"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "word_word_books", force: :cascade do |t|
-    t.integer "word_id", null: false
-    t.integer "word_book_id", null: false
-    t.integer "mastered", default: 0, null: false
-    t.integer "last_reviewed_at"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "words", force: :cascade do |t|
+  create_table "words", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "word", null: false
+    t.integer "word_book_id", null: false
     t.string "alternative_spellings"
     t.string "meaning", null: false
     t.string "pronunciation", null: false
